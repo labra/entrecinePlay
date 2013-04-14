@@ -1,0 +1,25 @@
+@(films: List[Film])
+
+@import helper._
+@import play.i18n._
+
+
+@main("Entrecine") {
+    
+    <h1>@Messages.get("list.films")</h1>
+    
+    <table>
+    <tr><th>Film</th><th>Actor</th></tr>
+    @for(film <- films) {
+     <tr>
+       <td>@film.title</td>
+       <td>@for(actor <- film.actors) {
+         <p>@actor.name</p>
+       }
+       </td>
+     </tr>
+    }
+    </table>
+    
+    
+}

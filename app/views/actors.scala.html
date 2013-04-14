@@ -1,0 +1,36 @@
+@(actors: List[Actor], actorForm: Form[Actor])
+
+@import play.i18n._
+@import helper._
+
+@main(Messages.get("list.actors")) {
+    
+    <h1>@Messages.get("list.actors")</h1>
+    
+    <table>
+    <tr><th>Id</th><th>@Messages.get("name")</th></tr>
+        @for(actor <- actors) {
+            <tr>
+            <td>@actor.id</td>
+            <td>@actor.name</td>
+            <td>@form(routes.Admin.deleteActor(actor.id)) {
+                    <input type="image" 
+                    	   src="@{routes.Assets.at("images/delete.gif")}" 
+                    	   alt="Delete actor">
+
+                }</td>
+             </tr>
+        }
+    </table>
+    
+    <h2>@Messages.get("new.actor")</h2>
+    
+    @form(routes.Admin.newActor()) {
+        
+        @inputText(actorForm("name")) 
+        
+        <input type="submit" value="@{Messages.get("create")}">
+        
+    }
+    
+}

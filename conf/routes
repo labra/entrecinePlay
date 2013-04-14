@@ -1,0 +1,24 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                            controllers.Application.index()
+
+GET     /film						 controllers.Admin.films()
+GET     /film/:id					 controllers.Admin.film(id: Long)
+POST    /film                        controllers.Admin.newFilm()
+POST    /film/:id/delete             controllers.Admin.deleteFilm(id: Long)
+DELETE  /film/:id                    controllers.Admin.deleteFilm(id: Long)
+
+GET		/film/:id/addActor			   controllers.Admin.addActor(id: Long)
+POST    /film/:id/removeActor/:idActor controllers.Admin.removeActor(id: Long, idActor: Long)
+
+GET     /actor						 controllers.Admin.actors()
+GET     /actor/:id					 controllers.Admin.actor(id: Long)
+POST    /actor                       controllers.Admin.newActor()
+POST    /actor/:id/delete            controllers.Admin.deleteActor(id: Long)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

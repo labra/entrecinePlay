@@ -1,0 +1,24 @@
+@(film: Film, currentActors: List[Actor], otherActors: List[Actor])
+
+@import helper._
+
+@main("List of Films") {
+    
+    <h1>Add actor to film @film.title</h1>
+
+    <p>Current actors</p>
+    <ul>
+    @for(actor <- currentActors) { 
+    <li>@actor.name</li>
+    }
+    </ul>
+    @form(routes.Admin.addActor(film.id)) {
+     <select name="actor">
+      @for(actor <- otherActors) {
+       <option value="@actor.id">@actor.name</option>
+      }
+      <input type="submit" value="submit" />
+     </select>
+    }
+    
+}

@@ -1,0 +1,61 @@
+@(films: List[Film], filmForm: Form[Film])
+
+@import helper._
+@import play.i18n._
+
+
+@main(Messages.get("list.films")) {
+    
+    <h1>@Messages.get("list.films")</h1>
+    
+    <table>
+    <tr><th>Id</th>
+    	<th>@Messages.get("title")</th>
+    	<th>@Messages.get("actors")</th>
+    </tr>
+        @for(film <- films) {
+            <tr><td>@film.id</td>
+                <td>@film.title</td>
+                <td>
+				@if(film.actors.size() > 0) {
+				<table class="actors">
+                @for(actor <- film.actors) {
+                  <tr><td>@actor.name</td>
+                      <td>
+                      @form(routes.Admin.removeActor(film.id,actor.id)) {
+                    	<input type="image" 
+                    	   src="@{routes.Assets.at("images/delete.gif")}" 
+                    	   alt="Delete actor">
+                      }
+                  </tr>
+                }
+                </table>
+                }
+                @form(routes.Admin.addActor(film.id)) {
+                    <input type="image" 
+                    	   src="@{routes.Assets.at("images/add.gif")}" 
+                    	   alt="Add actor">
+                }
+                </td>
+                <td class="delete">
+                @form(routes.Admin.deleteFilm(film.id)) {
+                    <input type="image" 
+                    	   src="@{routes.Assets.at("images/delete.gif")}" 
+                    	   alt="Delete film">
+                }
+                </td>
+            </tr>
+        }
+    </table>
+    
+    <h2>Add a new film</h2>
+    
+    @form(routes.Admin.newFilm()) {
+
+        @inputText(filmForm("title")) 
+        
+        <input type="submit" value="@{Messages.get("create")}">
+        
+    }
+    
+}
