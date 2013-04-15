@@ -16,7 +16,7 @@ public class Admin extends Controller {
     public static Result films() {
     	return ok(
     		    views.html.films.render(Film.all(), filmForm)
-    		  );    
+    	);    
     }
 
     public static Result film(Long id) {

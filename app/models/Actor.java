@@ -33,7 +33,7 @@ public class Actor extends Model {
   }
   
   public static void delete(Long id) {
-	  find.ref(id).delete();
+	find.ref(id).delete();
   }
     
 }
